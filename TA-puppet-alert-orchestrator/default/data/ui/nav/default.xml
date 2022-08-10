@@ -1,0 +1,5 @@
+<nav search_view="search" color="#000000">
+<view name="configuration" default="true"/>
+<view name="orchestrator_actions" label="Orchestrator Actions"/>
+<view name="search" label="Search"/>
+</nav>

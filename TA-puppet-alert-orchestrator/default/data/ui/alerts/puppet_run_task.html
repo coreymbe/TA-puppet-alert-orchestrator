@@ -1,0 +1,80 @@
+<form class="form-horizontal form-complex">
+<div class="control-group">
+	<label class="control-label" for="puppet_run_task_action_target">Host <span class="required">*</span> </label>
+    <div class="controls">
+	<input type="text" name="action.puppet_run_task.param.action_target" id="puppet_run_task_action_target"/>
+    </div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="puppet_run_task_task_name">Task <span class="required">*</span> </label>
+    <div class="controls">
+	<input type="text" name="action.puppet_run_task.param.task_name" id="puppet_run_task_task_name"/>
+                <span class="help-block"> 
+                    Name of task to be run, such as: service::linux
+                </span>
+    </div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="puppet_run_task_task_parameters">Task Parameters  </label>
+    <div class="controls">
+	<input type="text" name="action.puppet_run_task.param.task_parameters" id="puppet_run_task_task_parameters"/>
+                <span class="help-block"> 
+                    Provide parameters as unescaped json: {"name" : "puppet", "action": "status"}
+                </span>
+    </div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="puppet_run_task_puppet_environment">Puppet Environment <span class="required">*</span> </label>
+    <div class="controls">
+	<input type="text" name="action.puppet_run_task.param.puppet_environment" id="puppet_run_task_puppet_environment"/>
+                <span class="help-block"> 
+                    Puppet environment that task is located in
+                </span>
+    </div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="puppet_run_task_puppet_user">Alternate Puppet User  </label>
+    <div class="controls">
+	<input type="text" name="action.puppet_run_task.param.puppet_user" id="puppet_run_task_puppet_user"/>
+                <span class="help-block"> 
+                    Override default Puppet User
+                </span>
+    </div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="puppet_run_task_puppet_orch_server">Orch. Services URL  </label>
+    <div class="controls">
+	<input type="text" name="action.puppet_run_task.param.puppet_orch_server" id="puppet_run_task_puppet_orch_server"/>
+                <span class="help-block"> 
+                    Override default PE Orch URL
+                </span>
+    </div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="puppet_run_task_timeout">Timeout  </label>
+    <div class="controls">
+	<input type="text" name="action.puppet_run_task.param.timeout" id="puppet_run_task_timeout"/>
+                <span class="help-block"> 
+                    Override default Timeout
+                </span>
+    </div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="puppet_run_task_splunk_hec_url">Splunk HEC URL  </label>
+    <div class="controls">
+	<input type="text" name="action.puppet_run_task.param.splunk_hec_url" id="puppet_run_task_splunk_hec_url"/>
+                <span class="help-block"> 
+                    Override default Splunk HEC URL
+                </span>
+    </div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="puppet_run_task_puppet_action_hec_token">Action HEC Token  </label>
+    <div class="controls">
+	<input type="text" name="action.puppet_run_task.param.puppet_action_hec_token" id="puppet_run_task_puppet_action_hec_token"/>
+                <span class="help-block"> 
+                    Override default Action HEC Token
+                </span>
+    </div>
+</div>
+</form>
