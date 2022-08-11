@@ -23,7 +23,7 @@ After installing and configuring both the `splunk_hec` Puppet module and the Pup
   * PE RBAC User
   * Password
 
-	![Account](TA-puppet-alert-actions/README/img/account.png)
+	![Account](TA-puppet-alert-orchestrator/readme/img/account.png)
 
 * **Configuration**:
   * PE Console URL
@@ -31,7 +31,7 @@ After installing and configuring both the `splunk_hec` Puppet module and the Pup
   * Splunk HEC URL
   * HEC Token
 	
-	![Configuration](TA-puppet-alert-actions/README/img/configuration.png)
+	![Configuration](TA-puppet-alert-orchestrator/readme/img/configuration.png)
 
 
 ## Usage
@@ -40,15 +40,15 @@ Once the add-on has been properly configured you can begin creating new Alerts t
 
 1. Create a Splunk search:
 
-	![Splunk Search](TA-puppet-alert-actions/README/pics/splunk_search.png)
+	![Splunk Search](TA-puppet-alert-orchestrator/readme/pics/splunk_search.png)
 	
 2. Save the search as an Alert:
 
-	![Save Splunk Search](TA-puppet-alert-actions/README/pics/save_as_alert.png)
+	![Save Splunk Search](TA-puppet-alert-orchestrator/readme/pics/save_as_alert.png)
 
 3. Configure the Alert Actions:
 
-	![Alert Action Configuration](TA-puppet-alert-actions/README/pics/alert_options.png)
+	![Alert Action Configuration](TA-puppet-alert-orchestrator/readme/pics/alert_options.png)
 
 ## Troubleshooting and Verification
 
