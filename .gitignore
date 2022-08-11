@@ -1,0 +1,6 @@
+*.pyc
+.vscod*
+.DS_Store
+local/*
+metadata/local.meta
+tmpdir/

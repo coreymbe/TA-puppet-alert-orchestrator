@@ -1,0 +1,50 @@
+name: Validate Splunk App
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  appinspect:
+    runs-on: ubuntu-latest
+    container: ghcr.io/coreymbe/splunk-appinspect:v2
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install JQ
+        run: apt update && apt install -y jq
+
+      - name: Run AppInspect
+        run: splunk-appinspect inspect TA-puppet-alert-orchestrator --output-file appinspect_result.json --mode precert
+
+      - name: Check AppInspect Errors
+        id: appinspect-errors
+        run: |
+          error_check=$(jq '.summary.error' appinspect_result.json)
+          echo "::set-output name=error_count::$error_check"
+
+      - name: Check AppInspect Failures
+        id: appinspect-failures
+        run: |
+          fail_check=$(jq '.summary.failure' appinspect_result.json)
+          echo "::set-output name=fail_count::$fail_check"
+
+      - name: AppInspect Errors
+        if: ${{ steps.appinspect-errors.outputs.error_count > 0 }}
+        uses: actions/github-script@v6
+        with:
+          script: core.setFailed('AppInspect contains errors!')
+
+      - name: AppInspect Failures
+        if: ${{ steps.appinspect-failures.outputs.fail_count > 0 }}
+        uses: actions/github-script@v6
+        with:
+          script: core.setFailed('AppInspect contains failures!')
+
+      - name: Upload AppInspect Results
+        uses: actions/upload-artifact@v2
+        with:
+          name: AppInspect_TA-puppet-alert-orchestrator
+          path: appinspect_result.json
