@@ -1,11 +1,11 @@
-# $SPUNK_HOME/etc/apps/TA-puppet-alert-actions/bin/inputs/orchestrator_actions.py
+# $SPUNK_HOME/etc/apps/TA-puppet-alert-orchestrator/bin/inputs/orchestrator_actions.py
 #
 import sys
 import os
 #
 #
 # If Splunk was installed in a custom location, change SPLUNK_APPS to the path where apps are installed.
-APP_NAME = 'TA-puppet-alert-actions'
+APP_NAME = 'TA-puppet-alert-orchestrator'
 if os.name == 'nt':
   SPLUNK_APPS = 'C:\Program Files\Splunk\etc\/apps\/'
 else:
@@ -22,7 +22,7 @@ try:
   import pie
   from splunk_aoblib.setup_util import Setup_Util
 except Exception as e:
-  sys.stderr.write("TA-puppet-alert-actions: Failed to import required libs - {}".format(e))
+  sys.stderr.write("TA-puppet-alert-orchestrator: Failed to import required libs - {}".format(e))
 #
 #
 # Define Splunk URI and session key.
@@ -67,7 +67,7 @@ try:
       upass = inputs['account']['password']
       endpoints = pie.util.getendpoints(inputs['pe_console'])
       rbac_url = endpoints['rbac']
-      token = pie.rbac.genauthtoken(user,upass,'TA-puppet-alert-actions',rbac_url,timeout)
+      token = pie.rbac.genauthtoken(user,upass,'TA-puppet-alert-orchestrator',rbac_url,timeout)
     try:
       #
       # Build event message for available Tasks by user.
@@ -96,7 +96,7 @@ try:
             hec_token = inputs['hec_token']
             post_tasks = pie.hec.post_action(tmessage,host,hec_url,hec_token)
           except Exception as e:
-            sys.stderr.write("TA-puppet-alert-actions: Failed to post task data to Splunk - {}".format(e))
+            sys.stderr.write("TA-puppet-alert-orchestrator: Failed to post task data to Splunk - {}".format(e))
         except:
           pass
       #
@@ -126,10 +126,10 @@ try:
             hec_token = inputs['hec_token']
             post_plans = pie.hec.post_action(pmessage,host,hec_url,hec_token)
           except Exception as e:
-            sys.stderr.write("TA-puppet-alert-actions: Failed to post plan data to Splunk - {}".format(e))
+            sys.stderr.write("TA-puppet-alert-orchestrator: Failed to post plan data to Splunk - {}".format(e))
         except:
           pass
     except Exception as e:
-      sys.stderr.write("TA-puppet-alert-actions: Failed to build event message - {}".format(e))
+      sys.stderr.write("TA-puppet-alert-orchestrator: Failed to build event message - {}".format(e))
 except Exception as e:
-  sys.stderr.write("TA-puppet-alert-actions: Empty Account List - {}".format(e))
+  sys.stderr.write("TA-puppet-alert-orchestrator: Empty Account List - {}".format(e))
