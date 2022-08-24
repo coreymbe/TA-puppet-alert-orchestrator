@@ -71,10 +71,10 @@ try:
     try:
       #
       # Build event message for available Tasks by user.
-      tasklist = pie.bolt.get_tasklist(inputs['pe_console'],token)
+      tasklist = pie.orch.get_tasklist(inputs['pe_console'],token)
       for task in tasklist:
         t_id = task['id']
-        task_parameter = pie.bolt.get_actionparams(t_id,token)
+        task_parameter = pie.orch.get_actionparams(t_id,token)
         tmessage = {
           'permitted': task['permitted'],
           'task_meta': None,
@@ -101,10 +101,10 @@ try:
           pass
       #
       # Build event message for available Plans by user.
-      planlist = pie.bolt.get_planlist(inputs['pe_console'],token)
+      planlist = pie.orch.get_planlist(inputs['pe_console'],token)
       for plan in planlist:
         p_id = plan['id']
-        plan_parameter = pie.bolt.get_actionparams(p_id,token)
+        plan_parameter = pie.orch.get_actionparams(p_id,token)
         pmessage = {
           'permitted': plan['permitted'],
           'plan_meta': None,
