@@ -24,6 +24,8 @@ def getendpoints (uri, useproxy=False):
 
   return endpoints
 
+# Given a path to a config_file:
+# Return a list of usernames from the config file.
 def list_accounts(config_file):
   config = configparser.ConfigParser()
   config.read(config_file)
@@ -35,6 +37,6 @@ def list_accounts(config_file):
       userlist.append(setting)
 
   if userlist == []:
-    sys.stderr.write("TA-puppet-alert-actions: Unable to find any users when parsing {}".format(config_file))
+    sys.stderr.write("TA-puppet-alert-actions: Unable to find any accounts when parsing {}".format(config_file))
   else:
     return userlist

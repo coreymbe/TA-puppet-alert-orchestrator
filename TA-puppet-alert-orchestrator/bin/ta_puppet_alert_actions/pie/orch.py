@@ -84,7 +84,6 @@ def reqplan(plan, token, environment, url, parameters=None):
 
 # Given URL and RBAC Token:
 # Retrieve list of available tasks
-#
 def get_tasklist(url, token):
   endpoint = "8143/orchestrator/v1/tasks"
   uri = '{}:{}'.format(url,endpoint)
@@ -94,15 +93,14 @@ def get_tasklist(url, token):
   except:
     print('Unexpected error:', sys.exc_info()[0])
     raise
- 
+
   if r.status_code != 200:
     raise ValueError('Unable to retrieve list of available Tasks:', uri, r.status_code, r.text)
-  
+
   return json.loads(r.text)['items']
 
 # Given URL and RBAC Token:
 # Retrieve list of available plans
-#
 def get_planlist(url, token):
   endpoint = "8143/orchestrator/v1/plans"
   uri = '{}:{}'.format(url,endpoint)
@@ -112,15 +110,14 @@ def get_planlist(url, token):
   except:
     print('Unexpected error:', sys.exc_info()[0])
     raise
- 
+
   if r.status_code != 200:
     raise ValueError('Unable to retrieve list of available Plans:', uri, r.status_code, r.text)
-  
+
   return json.loads(r.text)['items']
 
 # Given Task or Plan ID and RBAC Token:
-# Retrieve any available task parameters
-#
+# Retrieve any available parameters
 def get_actionparams(action_id, token):
   headers = {'X-Authentication': token}
   try:
@@ -128,7 +125,7 @@ def get_actionparams(action_id, token):
   except:
     print('Unexpected error:', sys.exc_info()[0])
     raise
- 
+
   if r.status_code == 200:
     return json.loads(r.text)  
   else:

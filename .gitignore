@@ -4,3 +4,4 @@
 local/*
 metadata/local.meta
 tmpdir/
+__pycache__/
