@@ -75,40 +75,26 @@ def run_report_generation(alert, transaction_uuids, helper):
   pdb_url = pdb_endpoint['pdb']
   
   splunk_hec_url = alert['global']['splunk_hec_url']
-  splunk_hec_token = alert['global']['splunk_hec_token']
-  #puppet_action_hec_token = alert['global']['puppet_action_hec_token']
+  puppet_action_hec_token = alert['global']['puppet_action_hec_token']
 
-  pdbuser = alert['global']['puppet_read_user']
-  pdbpass = alert['global']['puppet_read_user_pass']
+  rbac_user = alert['global']['puppet_user']
+  rbac_user_pass = alert['global']['puppet_user_pass']
 
-  # we don't use timeouts in these queries but we're using it for token lifetime generation
   if alert['global']['timeout'] is not None and alert['global']['timeout'] is not '':
-    timeout = alert['global']['timeout']
+    task_timeout = alert['global']['timeout']
   else:
-    timeout = 360
+    task_timeout = 360
 
-  # we're gonna set our token lifetime to be our timeout * number of events plus 60 seconds
   try:
-    lifetime = (int(timeout) * len(transaction_uuids)) + 60
+    token_lifetime = int(task_timeout) * 2
   except Exception as e:
-    helper.log_error("Timeout must be an integer, '{}' was provided instead".format(timeout))
+    helper.log_error("Timeout must be an integer, '{}' was provided instead".format(task_timeout))
 
-  #message = {
-  #  'message': 'Looking up detailed report for run: {}'.format(transaction_uuid),
-  #  'pe_console': pe_console,
-  #  'transaction_uuid': transaction_uuid,
-  #}
-
-  #pie.hec.post_action(message, host, splunk_hec_url, puppet_action_hec_token)
-
-  # all our data / settin parsing is done, lets do work
-
-  # Check if the user is configured with an RBAC token or Password:
+ # Check if the user is configured with an RBAC token or Password:
   if alert['global']['pe_token']:
-    auth_token = pdbpass
+    auth_token = rbac_user_pass
   else:
-    helper.log_debug("Attempting to get token for {}".format(pdbuser))
-    auth_token = pie.rbac.genauthtoken(pdbuser,pdbpass,'TA-puppet-alert-actions',rbac_url, lifetime)
+    auth_token = pie.rbac.genauthtoken(rbac_user,rbac_user_pass,'TA-puppet-alert-actions',rbac_url, timeout=token_lifetime)
 
   helper.log_info("Attempting to generate and submit {} detailed reports".format(len(transaction_uuids)))
   for uuid in transaction_uuids:
@@ -131,7 +117,7 @@ def run_report_generation(alert, transaction_uuids, helper):
     detailed_report['metrics'] = parsed_metrics
 
     helper.log_debug("Attempting to submit detailed report for {}".format(uuid['transaction_uuid']))
-    pie.hec.post_report(detailed_report,splunk_hec_url,splunk_hec_token)
+    pie.hec.post_report(detailed_report,splunk_hec_url,puppet_action_hec_token)
     # here we may want to sleep just to prevent from clobbering pdb
     time.sleep(2)
   

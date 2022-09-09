@@ -122,18 +122,22 @@ def process_event(helper, *args, **kwargs):
     
     # we use the override function to ensure we always use the alert value over the global if one exists
     helper.log_info("Credential lookup")
-    user_name = override('puppet_default_user', helper)
+    puppet_default_user = helper.get_global_setting("puppet_default_user")
+    puppet_alt_user = override('puppet_user', helper)
 
-    # get_user_credential gives us the user_name, unfortunately we can't search by ID even though inputs can
-    puppet_read_account = helper.get_user_credential(user_name)
-    puppet_read_user = puppet_read_account["username"]
-    puppet_read_user_pass = puppet_read_account["password"]
+    # ok at this point we can get the account
+    puppet_rbac_user_name = notnone(puppet_default_user, puppet_alt_user, helper)
 
+    puppet_rbac_account = helper.get_user_credential(puppet_rbac_user_name)
+
+    puppet_rbac_user = puppet_rbac_account["username"]
+    puppet_rbac_user_pass = puppet_rbac_account["password"]
+ 
     # Check if users are utilizing RBAC tokens instead of Passwords.
     # This setting is passed in as a string; so we are converting it to boolean here:
-    rbac_token = bool(int(puppet_read_account["pe_token"]))
+    rbac_token = bool(int(puppet_rbac_account["pe_token"]))
 
-    helper.log_debug("username={}".format(puppet_read_user))
+    helper.log_debug("username={}".format(puppet_rbac_user))
     
     # load the rest of the settings
     helper.log_info("Retrieving settings")
@@ -166,20 +170,14 @@ def process_event(helper, *args, **kwargs):
     alert = {}
     alert['global'] = {}
     alert['param'] = {}
-    
     alert['global']['puppet_enterprise_console'] = puppet_enterprise_console
-    alert['global']['puppet_read_user'] = puppet_read_user
-    alert['global']['puppet_read_user_pass'] = puppet_read_user_pass
+    alert['global']['puppet_db_url'] = notnone(puppet_enterprise_console, puppet_db_url, helper)
     alert['global']['splunk_hec_url'] = splunk_hec_url
-    alert['global']['splunk_hec_token'] = splunk_hec_token
+    alert['global']['puppet_user'] = puppet_rbac_user
+    alert['global']['puppet_user_pass'] = puppet_rbac_user_pass
+    alert['global']['puppet_action_hec_token'] = notnone(splunk_hec_token, puppet_action_hec_token, helper)
     alert['global']['timeout'] = timeout
     alert['global']['pe_token'] = rbac_token
-    
-    # we're using the notnone function to ensure we always have a value, even if it's duplicate
-    # we call it with notnone(default_value, possible_none, helper) - default_value is returned if possible_none is None
-    alert['global']['puppet_action_hec_token'] = notnone(splunk_hec_token, puppet_action_hec_token, helper)
-    alert['global']['puppet_db_url'] = notnone(puppet_enterprise_console, puppet_db_url, helper)
-
 
     helper.log_debug("Getting event data")
     # we're going to strip out the three things we need from every event
