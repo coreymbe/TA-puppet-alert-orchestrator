@@ -1,35 +1,62 @@
-
 [puppet_generate_detailed_report]
 python.version = python3
-param.puppet_enterprise_console = <string> Puppet Enterprise Console.
-param.puppet_default_user = <string> User.
-param.splunk_hec_url = <string> Splunk HEC URL.
-param.splunk_hec_token = <string> Splunk HEC Token.
-param.puppet_action_hec_token = <string> Action HEC Token.
-param.puppet_db_url = <string> PuppetDB URL.
-param.timeout = <string> Timeout.
-param.pe_console = <string> PE Installation.
+param.puppet_enterprise_console = <string>
+* Alternate PE Console URL
+param.puppet_db_url = <string>
+* Alternate PuppetDB URL
+param.puppet_user = <string>
+* Alternate RBAC user to run the task.
+param.timeout = <string>
+* Alternate timeout.
+param.splunk_hec_url = <string>
+* Alternate Splunk HEC URL.
+param.puppet_action_hec_token = <string>
+* Alternate Action HEC Token.
 
 [puppet_run_task]
 python.version = python3
-param.action_target = <string> Host. Its a required parameter. Its default value is "$result.host$".
-param.task_name = <string> Task. Its a required parameter.
-param.task_parameters = <string> Task Parameters.
-param.puppet_environment = <string> Puppet Environment. Its a required parameter. Its default value is production.
-param.puppet_user = <string> Bolt User.
-param.puppet_orch_server = <string> Orch. Services URL.
-param.timeout = <string> Timeout.
-param.splunk_hec_url = <string> Splunk HEC URL.
-param.puppet_action_hec_token = <string> Action HEC Token.
+param.action_target = <string>
+* Hostname of the target to run the task on.
+* Default value is "$result.host$"
+* (required)
+param.task_name = <string>
+* Task Name
+* (required)
+param.task_parameters = <string>
+* Task Parameters
+param.puppet_environment = <string>
+* Puppet environment where the task is located.
+* Default value is production.
+* (required)
+param.puppet_user = <string>
+* Alternate RBAC user to run the task.
+param.puppet_orch_server = <string>
+* Alternate URL for the Orchestrator Server.
+param.timeout = <string>
+* Alternate timeout.
+param.splunk_hec_url = <string>
+* Alternate Splunk HEC URL.
+param.puppet_action_hec_token = <string>
+* Alternate Action HEC Token.
 
 [puppet_run_plan]
 python.version = python3
-param.plan_name = <string> Plan - Its a required parameter.
-param.plan_parameters = <string> Plan Parameters.
-param.puppet_environment = <string> Puppet Environment. Its a required parameter. Its default value is production.
-param.puppet_user = <string> Bolt User.
+param.plan_name = <string>
+* Plan Name
+* (required)
+param.plan_parameters = <string>
+* Plan Parameters
+param.puppet_environment = <string>
+* Puppet environment where the plan is located.
+* Default value is production.
+* (required)
+param.puppet_user = <string>
+* Alternate RBAC user to run the plan.
 param.puppet_orch_server = <string> Orch. Services URL.
-param.timeout = <string> Timeout.
-param.splunk_hec_url = <string> Splunk HEC URL.
-param.puppet_action_hec_token = <string> Action HEC Token.
-
+* Alternate URL for the Orchestrator Server.
+param.timeout = <string>
+* Alternate timeout.
+param.splunk_hec_url = <string>
+* Alternate Splunk HEC URL.
+param.puppet_action_hec_token = <string>
+* Alternate Action HEC Token

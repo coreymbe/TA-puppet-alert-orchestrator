@@ -1,74 +1,26 @@
-<form class="form-horizontal form-complex">
-<div class="control-group">
-	<label class="control-label" for="puppet_generate_detailed_report_puppet_enterprise_console">Puppet Enterprise Console  </label>
-    <div class="controls">
-	<input type="text" name="action.puppet_generate_detailed_report.param.puppet_enterprise_console" id="puppet_generate_detailed_report_puppet_enterprise_console"/>
-                <span class="help-block"> 
-                    Override which PE Console to use
-                </span>
-    </div>
-</div>
-<div class="control-group">
-	<label class="control-label" for="puppet_generate_detailed_report_puppet_default_user">User  </label>
-    <div class="controls">
-	<input type="text" name="action.puppet_generate_detailed_report.param.puppet_default_user" id="puppet_generate_detailed_report_puppet_default_user"/>
-                <span class="help-block"> 
-                    Override which User account to use
-                </span>
-    </div>
-</div>
-<div class="control-group">
-	<label class="control-label" for="puppet_generate_detailed_report_splunk_hec_url">Splunk HEC URL  </label>
-    <div class="controls">
-	<input type="text" name="action.puppet_generate_detailed_report.param.splunk_hec_url" id="puppet_generate_detailed_report_splunk_hec_url"/>
-                <span class="help-block"> 
-                    Override which Splunk HEC URL to use
-                </span>
-    </div>
-</div>
-<div class="control-group">
-	<label class="control-label" for="puppet_generate_detailed_report_splunk_hec_token">Splunk HEC Token  </label>
-    <div class="controls">
-	<input type="text" name="action.puppet_generate_detailed_report.param.splunk_hec_token" id="puppet_generate_detailed_report_splunk_hec_token"/>
-                <span class="help-block"> 
-                    Override which Splunk HEC Token to use
-                </span>
-    </div>
-</div>
-<div class="control-group">
-	<label class="control-label" for="puppet_generate_detailed_report_puppet_action_hec_token">Action HEC Token  </label>
-    <div class="controls">
-	<input type="text" name="action.puppet_generate_detailed_report.param.puppet_action_hec_token" id="puppet_generate_detailed_report_puppet_action_hec_token"/>
-                <span class="help-block"> 
-                    Override which Action HEC token to use
-                </span>
-    </div>
-</div>
-<div class="control-group">
-	<label class="control-label" for="puppet_generate_detailed_report_puppet_db_url">PuppetDB URL  </label>
-    <div class="controls">
-	<input type="text" name="action.puppet_generate_detailed_report.param.puppet_db_url" id="puppet_generate_detailed_report_puppet_db_url"/>
-                <span class="help-block"> 
-                    Override which PuppetDB URL to use
-                </span>
-    </div>
-</div>
-<div class="control-group">
-	<label class="control-label" for="puppet_generate_detailed_report_timeout">Timeout  </label>
-    <div class="controls">
-	<input type="text" name="action.puppet_generate_detailed_report.param.timeout" id="puppet_generate_detailed_report_timeout"/>
-                <span class="help-block"> 
-                    Override timeout settings for this alert
-                </span>
-    </div>
-</div>
-<div class="control-group">
-	<label class="control-label" for="puppet_generate_detailed_report_pe_console">PE Installation  </label>
-    <div class="controls">
-	<input type="text" name="action.puppet_generate_detailed_report.param.pe_console" id="puppet_generate_detailed_report_pe_console"/>
-                <span class="help-block"> 
-                    Override default PE Installation (pe_console value used in splunk_hec module)
-                </span>
-    </div>
-</div>
+<form>
+  <splunk-control-group label="Puppet Enterprise Console" help="Alternate PE Console URL">
+    <splunk-text-area name="action.puppet_generate_detailed_report.param.puppet_enterprise_console" id="puppet_generate_detailed_report_puppet_enterprise_console">
+    </splunk-text-area>
+  </splunk-control-group>
+  <splunk-control-group label="PuppetDB URL" help="Override the default PuppetDB URL">
+    <splunk-text-input name="action.puppet_generate_detailed_report.param.puppet_db_url" id="puppet_generate_detailed_report_puppet_db_url">
+    </splunk-text-input>
+  </splunk-control-group>
+  <splunk-control-group label="Alternate Puppet User" help="Override default Puppet User">
+    <splunk-text-input name="action.puppet_generate_detailed_report.param.puppet_user" id="puppet_generate_detailed_report_puppet_user">
+    </splunk-text-input>
+  </splunk-control-group>
+  <splunk-control-group label="Timeout" help="Override the default Timeout">
+    <splunk-text-input name="action.puppet_generate_detailed_report.param.timeout" id="puppet_generate_detailed_report_timeout">
+    </splunk-text-input>
+  </splunk-control-group>
+  <splunk-control-group label="Splunk HEC URL" help="Override the default Splunk HEC URL">
+    <splunk-text-input name="action.puppet_generate_detailed_report.param.splunk_hec_url" id="puppet_generate_detailed_report_splunk_hec_url">
+    </splunk-text-input>
+  </splunk-control-group>
+  <splunk-control-group label="Action HEC Token" help="Override the default Action HEC Token">
+    <splunk-text-input name="action.puppet_generate_detailed_report.param.puppet_action_hec_token" id="puppet_generate_detailed_report_puppet_action_hec_token">
+    </splunk-text-input>
+  </splunk-control-group>
 </form>

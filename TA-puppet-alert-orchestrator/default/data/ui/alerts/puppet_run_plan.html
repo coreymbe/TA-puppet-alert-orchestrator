@@ -7,11 +7,11 @@
     />
   </splunk-control-group>
   <splunk-control-group label="Plan Parameters" help="Provide parameters as unescaped json: {&quot;target&quot; : &quot;$result.host$&quot;, &quot;service&quot;: &quot;puppet&quot;}">
-    <splunk-text-area name="action.puppet_run_plan.param.plan_parameters" id="puppet_run_plan_plan_parameter">
+    <splunk-text-area name="action.puppet_run_plan.param.plan_parameters" id="puppet_run_plan_plan_parameters">
     </splunk-text-area>
   </splunk-control-group>
   <splunk-control-group label="Puppet Environment" help="The Puppet environment that the Plan is located in.">
-    <splunk-text-input name="action.puppet_run_plan.param.puppet_environment" id="puppet_run_plan_puppet_environment">
+    <splunk-text-input name="action.puppet_run_plan.param.puppet_environment" id="puppet_run_plan_puppet_environment" value="production">
     </splunk-text-input>
   </splunk-control-group>
   <splunk-control-group label="Alternate Puppet User" help="Override default Puppet User">
